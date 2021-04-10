@@ -24,7 +24,9 @@ function translate()
 	var sub;
 	var horozontal = replacements[j];
 	let slowlyPrint = (text, delay) => {
-		setTimeout(() => document.write(text), delay);
+		setTimeout(() => {
+			document.body.innerHTML = text;
+		}, delay);
 	};
 	var sleep = function(ms){
   let now = Date.now(),
@@ -51,7 +53,7 @@ while (c<1000)
 			{
 				//sleep(1000);
 				slowlyPrint(b, c * linePrintLag);
-				slowlyPrint("work1", c * linePrintLag);
+				//slowlyPrint("work1", c * linePrintLag);
 								//break;
 			}
 			else if(x==horozontal.length-1)
