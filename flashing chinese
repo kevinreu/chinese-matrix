@@ -10,13 +10,13 @@
 function translate()
 {
 	var b = " "+document.getElementById("myText").value+" ";
+	document.getElementById("demo").style.fontFamily = "italic";
 	var replacements=
 			[
 			 [1 ,"a","b","c","d","e"],
 			 [1 ,"f","g"],
 			 [1 ,"h","i","j","k","l","m","n","o","p"]
 					 ];
-	var i;
 	var j=0;
 	var c=0;
 	//var k=0
@@ -37,7 +37,7 @@ function translate()
     now = Date.now();
   }
 };
-while (c<1000)
+while (c<10000)
 {c++;
 	for(j=0;j<replacements.length;j++)
 	{
@@ -49,38 +49,28 @@ while (c<1000)
 		//document.write(" j=" + j);
 	  //document.write(" x=" + x);
 		//for(j=0;j<replacements.length;j++)
-
 			//document.write(" replacements[j][0]=" +replacements[j][0]);
 			//document.write(" replacements[j].length=" +replacements[j].length);
 			//var k = replacements[j];
 			//if(replacements[j][0]==replacements[j].length)
-
 			 if(replacements[j][0]<replacements[j].length-1)
 			{
 			  b=b.replaceAll(replacements[j][(replacements[j][0])],replacements[j][(1+replacements[j][0])]);
-				//document.write("\n");
+				replacements[j][0]++;
+				slowlyPrint(b, c * linePrintLag);
 				//document.write(" x=" + x);
 				//document.write(" j=" + j);
 				//document.write(" r=" + replacements[j][0]);
-				replacements[j][0]++;
 				//document.write('worked2');
-			  slowlyPrint(b, c * linePrintLag);
-				//document.write(" j=" + j);
-			  //document.write(" x=" + x);
-				//j++;
-				//document.write(" x=" + x);
 	  	}
 			else if(replacements[j][0]==replacements[j].length-1)
 			{
 				b=b.replaceAll(replacements[j][(replacements[j][0])],replacements[j][1]);
-				//document.write("\n");
-				//document.write(" x=" + x);
-				//document.write(" j=" + j);
-				//document.write(" r=" + replacements[j][0]);
 				replacements[j][0]=1;
 			  slowlyPrint(b, c * linePrintLag);
 				//document.write(" x=" + x);
-				//document.write('worked3');
+				//document.write(" j=" + j);
+				//document.write(" r=" + replacements[j][0]);
 
 	}
 }
