@@ -12,15 +12,15 @@ function translate()
 	var b = " "+document.getElementById("myText").value+" ";
 	var replacements=
 			[
-			 [1,"a","b","c","d","e"],
-			 [1,"f","g"],
-			 [1,"h","i","j"]
+			 [1 ,"a","b","c","d","e"],
+			 [1 ,"f","g"],
+			 [1 ,"h","i","j","k","l","m","n","o","p"]
 					 ];
 	var i;
 	var j=0;
 	var c=0;
 	//var k=0
-	var linePrintLag = 500; //in milliseconds
+	var linePrintLag = 50; //in milliseconds
 	var sub;
 	var horozontal = replacements[j];
 	let slowlyPrint = (text, delay) =>
@@ -39,62 +39,51 @@ function translate()
 };
 while (c<1000)
 {c++;
-	for(var x=1;x<=replacements[j].length;x++/*,replacements[j][0]++*/)//need to iterate replacements[j] but its not insided the loop
+	for(j=0;j<replacements.length;j++)
 	{
-
-
+	//for(x=1;x<=replacements[j].length-1;x++/*,replacements[j][0]++*/)//need to iterate replacements[j] but its not insided the loop
+	//
 		//document.write(" replacements[j]=" + replacements[j]);   WORKING
 		//document.write(" length=" + replacements.length);
 		//document.write(" [j][0]=" + replacements[j][0]);
 		//document.write(" j=" + j);
 	  //document.write(" x=" + x);
-		//document.write(x);
-		if(j<=replacements.length)
 		//for(j=0;j<replacements.length;j++)
-		{
+
 			//document.write(" replacements[j][0]=" +replacements[j][0]);
 			//document.write(" replacements[j].length=" +replacements[j].length);
 			//var k = replacements[j];
-			if(replacements[j][0]==replacements[j].length)
+			//if(replacements[j][0]==replacements[j].length)
+
+			 if(replacements[j][0]<replacements[j].length-1)
 			{
-				replacements[j][0]=0;
-				b=b.replaceAll(replacements[j][x],replacements[j][1]);
+			  b=b.replaceAll(replacements[j][(replacements[j][0])],replacements[j][(1+replacements[j][0])]);
+				//document.write("\n");
 				//document.write(" x=" + x);
 				//document.write(" j=" + j);
-				//document.write('worked1');
-				slowlyPrint(b+"a", c * linePrintLag);
-				//document.write(" x=" + x);
-
-				//document.write('worked3');
-			}
-			else if(replacements[j][0]<replacements[j].length)
-			{
-
+				//document.write(" r=" + replacements[j][0]);
 				replacements[j][0]++;
-			  b=b.replaceAll(replacements[j][x],replacements[j][x+1]);
-				//document.write(" x=" + x);
+				//document.write('worked2');
+			  slowlyPrint(b, c * linePrintLag);
 				//document.write(" j=" + j);
-				document.write('worked2');
-			  slowlyPrint(b+"b", c * linePrintLag);
+			  //document.write(" x=" + x);
+				//j++;
 				//document.write(" x=" + x);
 	  	}
-  	}
-		j++;
-		if(x==replacements[j].length && j==replacements.length)
-		{
-			//document.write(" x=" + x);
-			//document.write(" j=" + j);
-			//document.write('worked3');
-			x=1;
-			j=0;
-		}
-	  else if (j==replacements.length)
-		{
-			j=0;
-		}
-
+			else if(replacements[j][0]==replacements[j].length-1)
+			{
+				b=b.replaceAll(replacements[j][(replacements[j][0])],replacements[j][1]);
+				//document.write("\n");
+				//document.write(" x=" + x);
+				//document.write(" j=" + j);
+				//document.write(" r=" + replacements[j][0]);
+				replacements[j][0]=1;
+			  slowlyPrint(b, c * linePrintLag);
+				//document.write(" x=" + x);
+				//document.write('worked3');
 
 	}
+}
 }
 }
 </script>
