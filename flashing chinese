@@ -7,7 +7,7 @@
 <button onclick="window.translate()">Flash</button>
 <p id="demo"></p>
 <script>
-function translate()
+async function translate()
 {
 	var b = " "+document.getElementById("myText").value+" ";
 	document.getElementById("demo").style.fontFamily = "italic";
@@ -23,23 +23,20 @@ function translate()
 	var linePrintLag = 50; //in milliseconds
 	var sub;
 	var horozontal = replacements[j];
-	let slowlyPrint = (text, delay) =>
+	const print = (text) =>
 	{
-		setTimeout(() =>
-		{
 			document.body.innerHTML = text;
-		}, delay);
 	};
-	var sleep = function(ms){
-  let now = Date.now(),
-      end = now + ms;
-  while (now < end) {
-    now = Date.now();
-  }
-};
-while (c<10000)
-{c++;
-	for(j=0;j<replacements.length;j++)
+	const slowlyReplaceCharacters = async (counter) => {
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				replaceCharacters(counter);
+				resolve();
+			}, linePrintLag);
+		});
+	}
+	const replaceCharacters = (counter) => {
+		for(j=0;j<replacements.length;j++)
 	{
 	//for(x=1;x<=replacements[j].length-1;x++/*,replacements[j][0]++*/)//need to iterate replacements[j] but its not insided the loop
 	//
@@ -57,7 +54,7 @@ while (c<10000)
 			{
 			  b=b.replaceAll(replacements[j][(replacements[j][0])],replacements[j][(1+replacements[j][0])]);
 				replacements[j][0]++;
-				slowlyPrint(b, c * linePrintLag);
+				print(b);
 				//document.write(" x=" + x);
 				//document.write(" j=" + j);
 				//document.write(" r=" + replacements[j][0]);
@@ -67,13 +64,24 @@ while (c<10000)
 			{
 				b=b.replaceAll(replacements[j][(replacements[j][0])],replacements[j][1]);
 				replacements[j][0]=1;
-			  slowlyPrint(b, c * linePrintLag);
+			  print(b);
 				//document.write(" x=" + x);
 				//document.write(" j=" + j);
 				//document.write(" r=" + replacements[j][0]);
 
 	}
 }
+	} 
+	var sleep = function(ms){
+  let now = Date.now(),
+      end = now + ms;
+  while (now < end) {
+    now = Date.now();
+  }
+};
+while (true)
+{c++;
+	await slowlyReplaceCharacters(c);
 }
 }
 </script>
