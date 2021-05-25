@@ -1,6 +1,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+span {
+	width: 1px;
+
+	font-family: monospace;
+}
+</style>
 </head>
 <body>
 <input type="text" id="myText" value="">
@@ -10,16 +17,16 @@
 async function translate()
 {
 	var b = " "+document.getElementById("myText").value+" ";
-	myText.style.fontFamily = "Impact,Charcoal,sans-serif";
+	//myText.style.fontFamily = "Impact,Charcoal,sans-serif";
 	var replacements=
 			[
 			 [1 ,"a","b","c","d","e"],
-			 [1 ,"f","g"],
+			 [1 ,"f","g","开"],
 			 [1 ,"h","i","j","k","l","m","n","o","p"]
 					 ];
 	var j=0;
 	var c=0;
-	var linePrintLag = 5000; //in milliseconds
+	var linePrintLag = 500; //in milliseconds
 	const print = (text) =>
 	{
 		document.body.innerHTML = text;
@@ -36,7 +43,6 @@ async function translate()
 	const replaceCharacters = (counter) => {
 		for(j=0;j<replacements.length;j++)
 		{
-
 			if(replacements[j][0]<replacements[j].length-1)
 			{
 				b=b.replaceAll(replacements[j][(replacements[j][0])],replacements[j][(1+replacements[j][0])]);
